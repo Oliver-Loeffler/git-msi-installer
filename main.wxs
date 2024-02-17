@@ -28,7 +28,7 @@
 		</SetProperty>
 
 		<!-- License agreement text: dummy. Real text is set in WXS file -->
-		<WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
+		<WixVariable Id="WixUILicenseRtf" Value="Resources\LICENSE.rtf" />
 		
 		<!-- Replace UI bitmaps -->
 		<WixVariable Id="WixUIBannerBmp" Value="Bitmaps\bannrbmp.bmp" />
