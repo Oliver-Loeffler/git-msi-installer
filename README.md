@@ -3,6 +3,11 @@
 * Requires: WiX Toolset 3.11 (for MSI packaging)
 * Requires: ImageMagick (for Icon conversions)
 
+## License and Attributions
+
+[License](LICENSE)
+[Attributions](ATTRIBUTIONS)
+
 ## Goal
 
 * Have a pre-configured, standardized Microsoft-Admin-friendly distribution for latest Git-SCM releases on Windows.
