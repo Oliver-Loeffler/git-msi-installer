@@ -23,6 +23,7 @@
 * `prepare.cmd` to update Git Portable with the desired settings
 * Then manually modify `bundle.wxs` to the desired settings (e.g. environment variables, icons etc.)
 * Update `main.wxs` with all necessary settings
-* Rename `bundle.wxs` to `bundle2.wxs`
 * run `build.cmd` so that WiX Toolset can prepare the MSI
 
+Manual adjustments (beside version numbers) to `bundle.wxs` and `main.wxs` are no longer needed. All icons, links and environment variable settings are now declared in `main.wxs`.
+Hence one can safely execute `heat` on the source directory to harvest all files.

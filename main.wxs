@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?define var.AppUrl       = "https://git-scm.com/doc" ?>
-<?define var.AboutUrl     = "https://git-scm.com/community" ?>
-<?define var.ReadmeUrl    = "https://github.com/git-for-windows/git/releases/tag/v2.43.0.windows.1" ?>
-<?define var.AppContact   = "oliver@raumzeitfalle" ?>
-<?define var.ReferenceUrl = "https://git-scm.com/docs" ?>
-<?define var.BookUrl      = "https://git-scm.com/book" ?>
+<?define var.AppUrl        = "https://git-scm.com/doc" ?>
+<?define var.AboutUrl      = "https://git-scm.com/community" ?>
+<?define var.ReadmeUrl     = "https://github.com/git-for-windows/git/releases/tag/v2.43.0.windows.1" ?>
+<?define var.AppContact    = "oliver@raumzeitfalle" ?>
+<?define var.ReferenceUrl  = "https://git-scm.com/docs" ?>
+<?define var.BookUrl       = "https://git-scm.com/book" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
@@ -206,33 +206,24 @@
 				 AllowAdvertise="no" 
 				 ConfigurableDirectory="APPLICATIONROOTDIRECTORY">
 			<ComponentGroupRef Id="GIT_PORTABLE" />
-
-			<ComponentRef Id="GitBashShortcut" />
-			<ComponentRef Id="GitCmdShortcut" />
-			<ComponentRef Id="GitGuiShortcut" />	
-
+			<Feature Id="ApplicationMenuShortcuts" 
+				 Title="Add Applications to the Start Menu" 
+				 Level="1" 
+				 Absent="allow" 
+				 Description="Allows to start Git-Bash, Git-CMD and also Git-GUI from Windows Startmenu."
+				 AllowAdvertise="no" >
+				<ComponentRef Id="GitBashShortcut" />
+				<ComponentRef Id="GitCmdShortcut" />
+				<ComponentRef Id="GitGuiShortcut" />
+			</Feature>
 			<Feature Id="AddPathToEnvironment"
 				 Title="Update PATH variable" 
 				 Level="1" 
 				 Absent="allow" 
-				 Description="Allows to add ('git-bash', 'git-cmd') and/or ('git' and 'git-gui') to the users environment PATH variable."
+				 Description="Allows to call 'git-bash', 'git-cmd' and also 'git' and 'git-gui' from command line as all commands are published through the users PATH environment variable."
 				 AllowAdvertise="no" >
-				<Feature Id="BashPath"
-						  Title="append git-shells" 
-						  Level="1" 
-						  Absent="allow" 
-						  Description="tbd."
-						  AllowAdvertise="no" >
-					<ComponentRef Id="EnvironmentPathBash" />
-				</Feature>
-				<Feature Id="GuiPath"
-						  Title="append git/git-gui" 
-						  Level="1" 
-						  Absent="allow" 
-						  Description="tbd."
-						  AllowAdvertise="no" >
-					<ComponentRef Id="EnvironmentPathGui" />
-				</Feature>
+				<ComponentRef Id="EnvironmentPathBash" />
+				<ComponentRef Id="EnvironmentPathGui" />
 			</Feature>
 			<Feature Id="ExplorerIntegration"
 				 Title="Explorer Integration" 

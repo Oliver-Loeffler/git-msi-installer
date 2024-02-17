@@ -2,4 +2,4 @@
 move PortableGit\etc\gitconfig PortableGit\etc\gitconfig.origin
 copy Prepared\etc\gitconfig PortableGit\etc\gitconfig
 
-heat dir PortableGit -var packageSource -srd -sreg -dr TARGETDIR -gg -ke -cg FILES -sfrag -o bundle.wxs
+heat dir PortableGit -var var.packageSource -scom -srd -sreg -sfrag -dr APPLICATIONROOTDIRECTORY -gg -ke -cg GIT_PORTABLE -t remove.xsl -o bundle.wxs 
