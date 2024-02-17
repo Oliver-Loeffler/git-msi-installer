@@ -3,6 +3,12 @@
 * Requires: WiX Toolset 3.11 (for MSI packaging)
 * Requires: ImageMagick (for Icon conversions)
 
+## License and Attributions
+
+* [License](LICENSE) - Same license as Git, same license as Git Portable for Windows. https://git-scm.com/
+* [Attributions](ATTRIBUTIONS) - Thanks to Git-for-Windows and the Git-SCM teams! https://gitforwindows.org/
+* [Microsoft Reciprocal License (MS-RL)](http://opensource.org/licenses/ms-rl) - Thanks to the WiX Toolset team. [WiX Toolset](https://github.com/wixtoolset)
+
 ## Goal
 
 * Have a pre-configured, standardized Microsoft-Admin-friendly distribution for latest Git-SCM releases on Windows.
