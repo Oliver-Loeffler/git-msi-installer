@@ -5,8 +5,8 @@
 
 ## License and Attributions
 
-[License](LICENSE)
-[Attributions](ATTRIBUTIONS)
+* [License](LICENSE) - Same license as Git, same license as Git Portable for Windows.
+* [Attributions](ATTRIBUTIONS) - Thanks to Git-for-Windows and the Git-SCM teams!
 
 ## Goal
 
