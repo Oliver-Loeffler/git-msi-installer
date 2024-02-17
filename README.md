@@ -5,7 +5,7 @@
 
 ## MSI Installer?
 
-Well, there is something in works by Git-for-Windows. Have a look at the projects [FAQ](https://github.com/git-for-windows/git/wiki/FAQ#is-there-an-msi-for-installation-via-group-policy).
+Well, there is something in works by Git-for-Windows but progress seem to have stalled. Have a look at the projects [FAQ](https://github.com/git-for-windows/git/wiki/FAQ#is-there-an-msi-for-installation-via-group-policy).
 
 ## License and Attributions
 
