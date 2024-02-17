@@ -20,6 +20,7 @@ Well, there is something in works by Git-for-Windows but progress seem to have s
 * It should provide Start Menu links and links to Documentation.
 * It should provide Explorer Integration.
 * Default settings should match company requirements (e.g. HTTPS backend using Windows Secure Channels, NANO as editor etc.)
+* Basic `gitconfig` should be created during the installation process (its quite nice that `gitconfig` somehow follows the `ini`-file shema.
 
 ## Procedure
 
