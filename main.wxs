@@ -70,6 +70,8 @@
                 <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.ProgramDir)">
 					<Directory Id="GitGuiDirectory" Name="cmd">
 					</Directory>
+					<Directory Id="GitEtcDirectory" Name="etc">
+					</Directory>
 				</Directory>
             </Directory>
         
@@ -156,6 +158,141 @@
             </Directory>
         </Directory>
 		
+		<DirectoryRef Id="GitEtcDirectory">
+			<Component Id="GitConfig" Guid="b47339b1-25c5-4b38-bb97-fd3f32ea0ae8">
+				<CreateFolder />
+				<!-- CORE -->
+				<IniFile Id="IniSymlinks"
+						 Action="createLine"
+						 Section="core"
+						 Name="MyCustom.ini"
+						 Directory="GitEtcDirectory"
+						 Key="symlinks"
+						 Value="false" />
+				<IniFile Id="IniAutoCrlf"
+						 Action="createLine"
+						 Section="core"
+						 Name="MyCustom.ini"
+						 Directory="GitEtcDirectory"
+						 Key="autocrlf"
+						 Value="true" />
+				<IniFile Id="IniFscache"
+						 Action="createLine"
+						 Section="core"
+						 Name="MyCustom.ini"
+						 Directory="GitEtcDirectory"
+						 Key="fscache"
+						 Value="true" />
+				<IniFile Id="IniEditor"
+						 Action="createLine"
+						 Section="core"
+						 Name="MyCustom.ini"
+						 Directory="GitEtcDirectory"
+						 Key="editor"
+						 Value="nano.exe" />
+				<!-- COLOR -->
+				<IniFile Id="IniColor"
+						 Action="createLine"
+						 Section="color"
+						 Name="MyCustom.ini"
+						 Directory="GitEtcDirectory"
+						 Key="interactive"
+						 Value="true" />
+				<IniFile Id="IniUi"
+						 Action="createLine"
+						 Section="color"
+						 Name="MyCustom.ini"
+						 Directory="GitEtcDirectory"
+						 Key="ui"
+						 Value="auto" />
+				<!-- CREDENTIAL -->
+				<IniFile Id="IniCredential"
+						 Action="createLine"
+						 Section="credential"
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="helper"
+						 Value="manager" />
+				<!-- DIFF "astextplain" -->
+				<IniFile Id="IniDiff"
+						 Action="createLine"
+						 Section='diff "astextplain"'
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="textconv"
+						 Value="astextplain" />
+				<!-- FILTER "lfs" -->
+				<IniFile Id="IniFilterClean"
+						 Action="createLine"
+						 Section='filter "lfs"'
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="clean"
+						 Value="git-lfs clean -- %f" />
+				<IniFile Id="IniFilterSmudge"
+						 Action="createLine"
+						 Section='filter "lfs"'
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="smudge"
+						 Value="git-lfs smudge -- %f" />
+				<IniFile Id="IniFilterProgress"
+						 Action="createLine"
+						 Section='filter "lfs"'
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="process"
+						 Value="git-lfs filter-process" />
+				<IniFile Id="IniFilterRequired"
+						 Action="createLine"
+						 Section='filter "lfs"'
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="required"
+						 Value=" true" />
+				<!-- HELP -->
+				<IniFile Id="IniHelp"
+						 Action="createLine"
+						 Section="help"
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="format"
+						 Value="html" />
+				<!-- HTTP -->
+				<IniFile Id="IniHttp"
+						 Action="createLine"
+						 Section="http"
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="sslBackend"
+						 Value="schannel" />
+				<!-- INIT -->
+				<IniFile Id="IniGitInit"
+						 Action="createLine"
+						 Section="init"
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="defaultBranch "
+						 Value="master" />
+				<!-- PULL -->
+				<IniFile Id="IniGitPull"
+						 Action="createLine"
+						 Section="pull"
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="rebase"
+						 Value="false" />
+				<!-- REBASE -->
+				<IniFile Id="IniGitRebase"
+						 Action="createLine"
+						 Section="rebase"
+						 Directory="GitEtcDirectory"
+						 Name="MyCustom.ini"
+						 Key="autosquash"
+						 Value="true" />
+			</Component>
+		</DirectoryRef>
+		
 		<DirectoryRef Id="APPLICATIONROOTDIRECTORY">
 			<Component Id="EnvironmentPathBash" Guid="eae60b81-b7e8-49f5-86dd-bd7c50f5d141">
 				<CreateFolder/>
@@ -212,6 +349,7 @@
 				 AllowAdvertise="no" 
 				 ConfigurableDirectory="APPLICATIONROOTDIRECTORY">
 			<ComponentGroupRef Id="GIT_PORTABLE" />
+			<ComponentRef Id="GitConfig" />
 			<Feature Id="ApplicationMenuShortcuts" 
 				 Title="Add Applications to the Start Menu" 
 				 Level="1" 
