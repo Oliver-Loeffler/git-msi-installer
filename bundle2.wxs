@@ -4,7 +4,6 @@
         <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
             <Component Id="cmp70E7C07DD6E34DB6F5CAD474A0E9BFC3" Guid="{B40FC8A8-D02E-4365-B86C-57BEBCB2EBC9}">
                 <File Id="filAE788523B907C1A3333370B19D944256" KeyPath="yes" Source="PortableGit\git-bash.exe" />
-				<Environment Id="UpdatePathWithGitBash" Name="PATH" Action="set" Permanent="no" System="no" Part="last" Value="[APPLICATIONROOTDIRECTORY]" />
 				<Shortcut Id="GitBashApplicationMenuShortCut"
 						  Name="Git-Bash"
 						  Description="MSys2 Git Bash for Windows"
@@ -45,7 +44,6 @@
             </Directory>
             <Directory Id="dirFA93E91470CDE8AD9F2449D579D47163" Name="cmd">
                 <Component Id="cmp264A7642024A8C56AA3F397503DA2260" Guid="{677F8D9B-DD1F-4C10-8674-0CC3FE027EFD}">
-					<Environment Id="UpdatePathWithGitGuiGitK" Name="PATH" Action="set" Permanent="no" System="no" Part="last" Value="[dirFA93E91470CDE8AD9F2449D579D47163]" />
                     <File Id="fil9A00F254BBF82234D7C9F3A305B5F0BA" KeyPath="yes" Source="PortableGit\cmd\git-gui.exe" />
 					<Shortcut Id="GitGuiApplicationMenuShortCut"
 						  Name="Git-GUI"

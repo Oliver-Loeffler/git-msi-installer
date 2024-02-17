@@ -61,7 +61,10 @@
 
             <!-- Application Directory -->
 			<Directory Id="ProgramFilesFolder">
-                <Directory Id="APPLICATIONROOTDIRECTORY" Name="Git_Custom"/>
+                <Directory Id="APPLICATIONROOTDIRECTORY" Name="Git_Custom">
+					<Directory Id="GitGuiDirectory" Name="cmd">
+					</Directory>
+				</Directory>
             </Directory>
         
 			<!-- Start menu -->
@@ -102,6 +105,10 @@
         </Directory>
 		
 		<DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+			<Component Id="EnvironmentPathBash" Guid="eae60b81-b7e8-49f5-86dd-bd7c50f5d141">
+				<CreateFolder/>
+				<Environment Id="UpdatePathWithGitBash" Name="PATH" Action="set" Permanent="no" System="no" Part="last" Value="[APPLICATIONROOTDIRECTORY]" />
+			</Component>
 			<Component Id="GitBashHereRegistryEntries" Guid="511bf218-609c-495f-aa0b-27176ac9c4c4">
 				<RegistryKey Root="HKCU" 
 							 Key="SOFTWARE\Classes\Directory\background\shell\git_bash_here">
@@ -124,19 +131,26 @@
 					<RegistryValue Type="string" Value='"[APPLICATIONROOTDIRECTORY]\git-cmd.exe" "--cd=%v."'/>
 				</RegistryKey>
 			</Component>
+		</DirectoryRef>
+
+		<DirectoryRef Id="GitGuiDirectory">
+			<Component Id="EnvironmentPathGui" Guid="380d4813-af23-4ce1-9650-a0e212cdd9ea">
+				<CreateFolder/>
+				<Environment Id="UpdatePathWithGitGuiGitK" Name="PATH" Action="set" Permanent="no" System="no" Part="last" Value="[GitGuiDirectory]" />
+			</Component>
 			<Component Id="GitGuiHereRegistryEntries" Guid="f3416549-5259-4f94-86af-96723536b8d5">
 				<RegistryKey Root="HKCU" 
 							 Key="SOFTWARE\Classes\Directory\background\shell\git_gui_here">
 					<RegistryValue Type="string" Value="Git &amp;GUI Here" KeyPath="yes"/>
-					<RegistryValue Type="string" Name="Icon" Value="[APPLICATIONROOTDIRECTORY]\cmd\git-gui.exe"/>
+					<RegistryValue Type="string" Name="Icon" Value="[GitGuiDirectory]\git-gui.exe"/>
 				</RegistryKey>
 				<RegistryKey Root="HKCU" 
 							 Key="SOFTWARE\Classes\Directory\background\shell\git_gui_here\command">
-					<RegistryValue Type="string" Value='"[APPLICATIONROOTDIRECTORY]\cmd\git-gui.exe" "--working-dir" "%v."'/>
+					<RegistryValue Type="string" Value='"[GitGuiDirectory]\git-gui.exe" "--working-dir" "%v."'/>
 				</RegistryKey>
 			</Component>
 		</DirectoryRef>
-
+		
 		<!-- Define all installable features -->
 		<Feature Id="Programs" 
 				 Title="Git-for-Windows" 
@@ -146,6 +160,8 @@
 				 AllowAdvertise="no" 
 				 ConfigurableDirectory="APPLICATIONROOTDIRECTORY">
 			<ComponentGroupRef Id="GIT_PORTABLE" />
+			<ComponentRef Id="EnvironmentPathBash" />
+			<ComponentRef Id="EnvironmentPathGui" />
 			<Feature Id="ExplorerIntegration"
 				 Title="Explorer Integration" 
 				 Level="1" 
