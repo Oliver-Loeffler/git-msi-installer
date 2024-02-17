@@ -10,7 +10,7 @@
 <?define var.Version       = "2.43.0.1" ?>
 <?define var.ProgramDir    = "git-scm" ?>
 <?define var.ProgramGroup  = "Git for Windows" ?>
-
+<?define var.gitconfig     = "gitconfig" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
@@ -165,28 +165,28 @@
 				<IniFile Id="IniSymlinks"
 						 Action="createLine"
 						 Section="core"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Directory="GitEtcDirectory"
 						 Key="symlinks"
 						 Value="false" />
 				<IniFile Id="IniAutoCrlf"
 						 Action="createLine"
 						 Section="core"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Directory="GitEtcDirectory"
 						 Key="autocrlf"
 						 Value="true" />
 				<IniFile Id="IniFscache"
 						 Action="createLine"
 						 Section="core"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Directory="GitEtcDirectory"
 						 Key="fscache"
 						 Value="true" />
 				<IniFile Id="IniEditor"
 						 Action="createLine"
 						 Section="core"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Directory="GitEtcDirectory"
 						 Key="editor"
 						 Value="nano.exe" />
@@ -194,14 +194,14 @@
 				<IniFile Id="IniColor"
 						 Action="createLine"
 						 Section="color"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Directory="GitEtcDirectory"
 						 Key="interactive"
 						 Value="true" />
 				<IniFile Id="IniUi"
 						 Action="createLine"
 						 Section="color"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Directory="GitEtcDirectory"
 						 Key="ui"
 						 Value="auto" />
@@ -210,7 +210,7 @@
 						 Action="createLine"
 						 Section="credential"
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="helper"
 						 Value="manager" />
 				<!-- DIFF "astextplain" -->
@@ -218,7 +218,7 @@
 						 Action="createLine"
 						 Section='diff "astextplain"'
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="textconv"
 						 Value="astextplain" />
 				<!-- FILTER "lfs" -->
@@ -226,28 +226,28 @@
 						 Action="createLine"
 						 Section='filter "lfs"'
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="clean"
 						 Value="git-lfs clean -- %f" />
 				<IniFile Id="IniFilterSmudge"
 						 Action="createLine"
 						 Section='filter "lfs"'
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="smudge"
 						 Value="git-lfs smudge -- %f" />
 				<IniFile Id="IniFilterProgress"
 						 Action="createLine"
 						 Section='filter "lfs"'
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="process"
 						 Value="git-lfs filter-process" />
 				<IniFile Id="IniFilterRequired"
 						 Action="createLine"
 						 Section='filter "lfs"'
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="required"
 						 Value=" true" />
 				<!-- HELP -->
@@ -255,7 +255,7 @@
 						 Action="createLine"
 						 Section="help"
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="format"
 						 Value="html" />
 				<!-- HTTP -->
@@ -263,7 +263,7 @@
 						 Action="createLine"
 						 Section="http"
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="sslBackend"
 						 Value="schannel" />
 				<!-- INIT -->
@@ -271,7 +271,7 @@
 						 Action="createLine"
 						 Section="init"
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="defaultBranch "
 						 Value="master" />
 				<!-- PULL -->
@@ -279,7 +279,7 @@
 						 Action="createLine"
 						 Section="pull"
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="rebase"
 						 Value="false" />
 				<!-- REBASE -->
@@ -287,7 +287,7 @@
 						 Action="createLine"
 						 Section="rebase"
 						 Directory="GitEtcDirectory"
-						 Name="MyCustom.ini"
+						 Name="$(var.gitconfig)"
 						 Key="autosquash"
 						 Value="true" />
 			</Component>
