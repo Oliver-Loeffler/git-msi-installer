@@ -107,7 +107,7 @@
 								  Name="Git-GUI"
 								  Description="Very simplistic UI for Git"
 								  WorkingDirectory="PersonalFolder"
-								  Target="[GitGuiDirectory]\git-cmd.exe"
+								  Target="[GitGuiDirectory]\git-gui.exe"
 								  Advertise="no"
 								  Icon="GitGui.ico">
 						</Shortcut>
