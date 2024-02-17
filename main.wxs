@@ -67,10 +67,56 @@
 				</Directory>
             </Directory>
         
+			<Directory Id="PersonalFolder">
+            </Directory>
+			
 			<!-- Start menu -->
 			<Directory Id="ProgramMenuFolder">
                 <Directory Id="ApplicationProgramsFolder" Name="Raumzeitfalle-Tools">
-					<Component Id="GitBookShortcut" Guid="{82A0CFF1-1B05-4C35-B52B-22A515BF0241}">
+					<Component Id="GitBashShortcut" Guid="ab355007-4027-4162-bc25-23894f0600f7">
+						<Shortcut Id="GitBashApplicationMenuShortCut"
+								  Name="Git-Bash"
+								  Description="MSys2 Git Bash for Windows"
+								  WorkingDirectory="PersonalFolder"
+								  Target="[APPLICATIONROOTDIRECTORY]\git-bash.exe"
+								  Advertise="no"
+								  Icon="StartMenuGitBash.exe">
+						</Shortcut>
+						<RegistryKey Root="HKCU" Key="Software\GitForWindowsCustom\Uninstall"> 
+							<RegistryValue Value="GitBashShortcut" Type="string" KeyPath="yes" />
+						</RegistryKey>
+						<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+					</Component>
+					
+					<Component Id="GitCmdShortcut" Guid="4d2ca504-84f9-4294-a072-7c9ac2c27ce7">
+						<Shortcut Id="GitCmdApplicationMenuShortCut"
+								  Name="Git-Cmd"
+								  Description="Git CMD for Windows"
+								  WorkingDirectory="PersonalFolder"
+								  Target="[APPLICATIONROOTDIRECTORY]\git-cmd.exe"
+								  Advertise="no"
+								  Icon="StartMenuGitCmd.exe">
+						</Shortcut>
+						<RegistryKey Root="HKCU" Key="Software\GitForWindowsCustom\Uninstall"> 
+							<RegistryValue Value="GitCmdShortcut" Type="string" KeyPath="yes" />
+						</RegistryKey>
+					</Component>
+	
+					<Component Id="GitGuiShortcut" Guid="299ea5c8-f70d-43d3-90c0-e415aff84c4b">
+						<Shortcut Id="GitGuiApplicationMenuShortCut"
+								  Name="Git-GUI"
+								  Description="Very simplistic UI for Git"
+								  WorkingDirectory="PersonalFolder"
+								  Target="[GitGuiDirectory]\git-cmd.exe"
+								  Advertise="no"
+								  Icon="GitGui.ico">
+						</Shortcut>
+						<RegistryKey Root="HKCU" Key="Software\GitForWindowsCustom\Uninstall"> 
+							<RegistryValue Value="GitGuiShortcut" Type="string" KeyPath="yes" />
+						</RegistryKey>
+					</Component>
+					
+					<Component Id="GitBookShortcut" Guid="82A0CFF1-1B05-4C35-B52B-22A515BF0241">
 						<Shortcut Id="GitBookOnline"
 								  Name="Git Pro (the book)"
 								  Description="The Git Book (online)"
@@ -80,7 +126,7 @@
 							<RegistryValue Value="GitBookShortcut" Type="string" KeyPath="yes" />
 						</RegistryKey> 
 					</Component>
-					<Component Id="GitReferenceShortcut" Guid="{86004768-42cf-41a2-8776-2f72788d48f1}">
+					<Component Id="GitReferenceShortcut" Guid="86004768-42cf-41a2-8776-2f72788d48f1">
 						<Shortcut Id="GitReferenceOnline"
 								  Name="Git Reference"
 								  Description="Comprehensive online reference to Git"
@@ -90,7 +136,7 @@
 							<RegistryValue Value="GitReferenceShortcut" Type="string" KeyPath="yes" />
 						</RegistryKey> 
 					</Component>
-					<Component Id="GitCommunityShortcut" Guid="{8b40c391-860d-4021-a68e-88acfcdf7314}">
+					<Component Id="GitCommunityShortcut" Guid="8b40c391-860d-4021-a68e-88acfcdf7314">
 						<Shortcut Id="GitCommunityOnline"
 								  Name="Git Community"
 								  Description="Mailing List and Bug Reporting"
@@ -160,8 +206,34 @@
 				 AllowAdvertise="no" 
 				 ConfigurableDirectory="APPLICATIONROOTDIRECTORY">
 			<ComponentGroupRef Id="GIT_PORTABLE" />
-			<ComponentRef Id="EnvironmentPathBash" />
-			<ComponentRef Id="EnvironmentPathGui" />
+
+			<ComponentRef Id="GitBashShortcut" />
+			<ComponentRef Id="GitCmdShortcut" />
+			<ComponentRef Id="GitGuiShortcut" />	
+
+			<Feature Id="AddPathToEnvironment"
+				 Title="Update PATH variable" 
+				 Level="1" 
+				 Absent="allow" 
+				 Description="Allows to add ('git-bash', 'git-cmd') and/or ('git' and 'git-gui') to the users environment PATH variable."
+				 AllowAdvertise="no" >
+				<Feature Id="BashPath"
+						  Title="append git-shells" 
+						  Level="1" 
+						  Absent="allow" 
+						  Description="tbd."
+						  AllowAdvertise="no" >
+					<ComponentRef Id="EnvironmentPathBash" />
+				</Feature>
+				<Feature Id="GuiPath"
+						  Title="append git/git-gui" 
+						  Level="1" 
+						  Absent="allow" 
+						  Description="tbd."
+						  AllowAdvertise="no" >
+					<ComponentRef Id="EnvironmentPathGui" />
+				</Feature>
+			</Feature>
 			<Feature Id="ExplorerIntegration"
 				 Title="Explorer Integration" 
 				 Level="1" 

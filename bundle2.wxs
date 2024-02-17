@@ -4,26 +4,9 @@
         <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
             <Component Id="cmp70E7C07DD6E34DB6F5CAD474A0E9BFC3" Guid="{B40FC8A8-D02E-4365-B86C-57BEBCB2EBC9}">
                 <File Id="filAE788523B907C1A3333370B19D944256" KeyPath="yes" Source="PortableGit\git-bash.exe" />
-				<Shortcut Id="GitBashApplicationMenuShortCut"
-						  Name="Git-Bash"
-						  Description="MSys2 Git Bash for Windows"
-						  WorkingDirectory="APPLICATIONROOTDIRECTORY"
-						  Directory="ApplicationProgramsFolder"
-						  Advertise="yes"
-						  Icon="StartMenuGitBash.exe">
-				</Shortcut>
-				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
             </Component>
             <Component Id="cmp7809CD137C38DF5AA532F818AF139116" Guid="{69E98CBA-81F6-417E-B0B7-6CD8B91694BD}">
                 <File Id="fil24AD07AB3A6237CBAA05A9F7828ECAED" KeyPath="yes" Source="PortableGit\git-cmd.exe" />
-				<Shortcut Id="GitCmdApplicationMenuShortCut"
-						  Name="Git-Cmd"
-						  Description="Git Cmd for Windows"
-						  WorkingDirectory="APPLICATIONROOTDIRECTORY"
-						  Directory="ApplicationProgramsFolder"
-						  Advertise="yes"
-						  Icon="StartMenuGitCmd.exe">
-				</Shortcut>
             </Component>
             <Component Id="cmp2CCD2E1A3A0955D99E25A0C07231E8C0" Guid="{5FFBE278-7092-40AC-8F1D-550A49FAF21B}">
                 <File Id="filAAC2B3A547268CDA3DC93800F8FD62DE" KeyPath="yes" Source="PortableGit\LICENSE.txt" />
@@ -45,14 +28,6 @@
             <Directory Id="dirFA93E91470CDE8AD9F2449D579D47163" Name="cmd">
                 <Component Id="cmp264A7642024A8C56AA3F397503DA2260" Guid="{677F8D9B-DD1F-4C10-8674-0CC3FE027EFD}">
                     <File Id="fil9A00F254BBF82234D7C9F3A305B5F0BA" KeyPath="yes" Source="PortableGit\cmd\git-gui.exe" />
-					<Shortcut Id="GitGuiApplicationMenuShortCut"
-						  Name="Git-GUI"
-						  Description="Very simplistic UI for Git"
-						  WorkingDirectory="dirFA93E91470CDE8AD9F2449D579D47163"
-						  Directory="ApplicationProgramsFolder"
-						  Advertise="yes"
-						  Icon="GitGui.ico">
-					</Shortcut>
                 </Component>
                 <Component Id="cmp214325DC830E9FC38E2BE3CA3B337D3E" Guid="{9F90BE66-E60E-45A0-9779-728C43FE4197}">
                     <File Id="filBE0ABDE06D91E4178B0737B597287120" KeyPath="yes" Source="PortableGit\cmd\git-receive-pack.exe" />
