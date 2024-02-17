@@ -5,15 +5,21 @@
 <?define var.AppContact    = "oliver@raumzeitfalle" ?>
 <?define var.ReferenceUrl  = "https://git-scm.com/docs" ?>
 <?define var.BookUrl       = "https://git-scm.com/book" ?>
+<?define var.Manufacturer  = "Raumzeitfalle.de" ?>
+<?define var.Application   = "Git for Windows" ?>
+<?define var.Version       = "2.43.0.1" ?>
+<?define var.ProgramDir    = "git-scm" ?>
+<?define var.ProgramGroup  = "Git for Windows" ?>
+
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
     <Product Id="*"  
 			 UpgradeCode="7b18ef36-119f-471b-997d-bb671c27fbc5"
-			 Version="2.43.0.1"
+			 Version="$(var.Version)"
 			 Language="1033"
-			 Name="Git for Windows (Customized)"
-			 Manufacturer="Raumzeitfalle.de">
+			 Name="$(var.Application)"
+			 Manufacturer="$(var.Manufacturer)">
 			
         <Package InstallerVersion="400" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited"/>
         <Media Id="1" Cabinet="gitcustom.cab" EmbedCab="yes" />
@@ -61,7 +67,7 @@
 
             <!-- Application Directory -->
 			<Directory Id="ProgramFilesFolder">
-                <Directory Id="APPLICATIONROOTDIRECTORY" Name="Git_Custom">
+                <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.ProgramDir)">
 					<Directory Id="GitGuiDirectory" Name="cmd">
 					</Directory>
 				</Directory>
@@ -72,7 +78,7 @@
 			
 			<!-- Start menu -->
 			<Directory Id="ProgramMenuFolder">
-                <Directory Id="ApplicationProgramsFolder" Name="Raumzeitfalle-Tools">
+                <Directory Id="ApplicationProgramsFolder" Name="$(var.ProgramGroup)">
 					<Component Id="GitBashShortcut" Guid="ab355007-4027-4162-bc25-23894f0600f7">
 						<Shortcut Id="GitBashApplicationMenuShortCut"
 								  Name="Git-Bash"
