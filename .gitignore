@@ -1,0 +1,6 @@
+/PortableGit/ 
+*.wixpdb 
+*.wixobj 
+*.msi 
+*.exe 
+*.bak 

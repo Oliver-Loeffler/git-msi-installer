@@ -1,0 +1,27 @@
+[core]
+	symlinks = false
+	autocrlf = true
+	fscache = true
+	editor = nano.exe
+[color]
+	interactive = true
+	ui = auto
+[credential]
+	helper = manager
+[diff "astextplain"]
+	textconv = astextplain
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[help]
+	format = html
+[http]
+	sslBackend = schannel
+[init]
+	defaultBranch = master
+[pull]
+	rebase = false
+[rebase]
+	autosquash = true

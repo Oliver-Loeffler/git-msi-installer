@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define var.AppUrl       = "https://git-scm.com/doc" ?>
+<?define var.AboutUrl     = "https://git-scm.com/community" ?>
+<?define var.ReadmeUrl    = "https://github.com/git-for-windows/git/releases/tag/v2.43.0.windows.1" ?>
+<?define var.AppContact   = "oliver@raumzeitfalle" ?>
+<?define var.ReferenceUrl = "https://git-scm.com/docs" ?>
+<?define var.BookUrl      = "https://git-scm.com/book" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+    <Product Id="*"  
+			 UpgradeCode="7b18ef36-119f-471b-997d-bb671c27fbc5"
+			 Version="2.43.0.1"
+			 Language="1033"
+			 Name="Git for Windows (Customized)"
+			 Manufacturer="Raumzeitfalle.de">
+			
+        <Package InstallerVersion="400" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited"/>
+        <Media Id="1" Cabinet="gitcustom.cab" EmbedCab="yes" />
+
+		<MajorUpgrade
+		  Schedule="afterInstallInitialize"
+		  DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit.">
+		</MajorUpgrade>
+
+		<SetProperty Id="ProgramFilesFolder" Value="[LocalAppDataFolder]" Before="CostFinalize">
+			<![CDATA[NOT Privileged]]>
+		</SetProperty>
+
+		<!-- License agreement text: dummy. Real text is set in WXS file -->
+		<WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
+		
+		<!-- Replace UI bitmaps -->
+		<WixVariable Id="WixUIBannerBmp" Value="Bitmaps\bannrbmp.bmp" />
+		<WixVariable Id="WixUIDialogBmp" Value="Bitmaps\dlgbmp.bmp" />
+		
+		<!-- Define icons -->
+		<Icon Id="StartMenuGitBash.exe" SourceFile="PortableGit\git-bash.exe"/>
+		<Icon Id="StartMenuGitCmd.exe" SourceFile="PortableGit\git-cmd.exe"/>
+		<Icon Id="ApplicationIcon.ico" SourceFile="gwindows_logo.ico"/>
+		<Icon Id="GitGui.ico" SourceFile="git-gui.ico"/>
+		<Icon Id="OnlineDocumentationIcon.ico" SourceFile="Git-Icon-1788C.ico"/>
+		
+		<!-- Set properties for add/remove programs -->
+		<Property Id="ARPPRODUCTICON"  Value="ApplicationIcon.ico" />
+		<Property Id="ARPHELPLINK"     Value="$(var.AppUrl)"       />
+		<Property Id="ARPREADME"       Value="$(var.ReadmeUrl)"    />
+		<Property Id="ARPCONTACT"      Value="$(var.AppContact)"   />
+		<Property Id="ARPURLINFOABOUT" Value="$(var.AboutUrl)"     />
+		<Property Id="ARPNOREPAIR"     Value="yes" Secure="yes"    />      <!-- Remove repair -->
+		<Property Id="ARPNOMODIFY"     Value="yes" Secure="yes"    />      <!-- Remove modify -->
+		<Property Id="GitBookUrl"      Value="$(var.BookUrl)"      />
+		<Property Id="GitReferenceUrl" Value="$(var.ReferenceUrl)" />
+		<Property Id="GitCommunityUrl" Value="$(var.AboutUrl)"     />
+		
+		
+		<!-- ARPURLUPDATEINFO,ARPHELPTELEPHONE -->
+		
+		<!-- Define the directory structure -->
+        <Directory Id="TARGETDIR" Name="SourceDir">
+
+            <!-- Application Directory -->
+			<Directory Id="ProgramFilesFolder">
+                <Directory Id="APPLICATIONROOTDIRECTORY" Name="Git_Custom"/>
+            </Directory>
+        
+			<!-- Start menu -->
+			<Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="Raumzeitfalle-Tools">
+					<Component Id="GitBookShortcut" Guid="{82A0CFF1-1B05-4C35-B52B-22A515BF0241}">
+						<Shortcut Id="GitBookOnline"
+								  Name="Git Pro (the book)"
+								  Description="The Git Book (online)"
+								  Icon="OnlineDocumentationIcon.ico"
+								  Target="[GitBookUrl]" />
+						<RegistryKey Root="HKCU" Key="Software\GitForWindowsCustom\Uninstall"> 
+							<RegistryValue Value="GitBookShortcut" Type="string" KeyPath="yes" />
+						</RegistryKey> 
+					</Component>
+					<Component Id="GitReferenceShortcut" Guid="{86004768-42cf-41a2-8776-2f72788d48f1}">
+						<Shortcut Id="GitReferenceOnline"
+								  Name="Git Reference"
+								  Description="Comprehensive online reference to Git"
+								  Icon="OnlineDocumentationIcon.ico"
+								  Target="[GitReferenceUrl]" />
+						<RegistryKey Root="HKCU" Key="Software\GitForWindowsCustom\Uninstall"> 
+							<RegistryValue Value="GitReferenceShortcut" Type="string" KeyPath="yes" />
+						</RegistryKey> 
+					</Component>
+					<Component Id="GitCommunityShortcut" Guid="{8b40c391-860d-4021-a68e-88acfcdf7314}">
+						<Shortcut Id="GitCommunityOnline"
+								  Name="Git Community"
+								  Description="Mailing List and Bug Reporting"
+								  Icon="OnlineDocumentationIcon.ico"
+								  Target="[GitCommunityUrl]" />
+						<RegistryKey Root="HKCU" Key="Software\GitForWindowsCustom\Uninstall"> 
+							<RegistryValue Value="GitCommunityShortcut" Type="string" KeyPath="yes" />
+						</RegistryKey> 
+					</Component>
+				</Directory>
+            </Directory>
+        </Directory>
+		
+		<DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+			<Component Id="GitBashHereRegistryEntries" Guid="511bf218-609c-495f-aa0b-27176ac9c4c4">
+				<RegistryKey Root="HKCU" 
+							 Key="SOFTWARE\Classes\Directory\background\shell\git_bash_here">
+					<RegistryValue Type="string" Value="Git Ba&amp;sh Here" KeyPath="yes"/>
+					<RegistryValue Type="string" Name="Icon" Value="[APPLICATIONROOTDIRECTORY]\git-bash.exe"/>
+				</RegistryKey>
+				<RegistryKey Root="HKCU" 
+							 Key="SOFTWARE\Classes\Directory\background\shell\git_bash_here\command">
+					<RegistryValue Type="string" Value='"[APPLICATIONROOTDIRECTORY]\git-bash.exe" "--cd=%v."'/>
+				</RegistryKey>
+			</Component>
+			<Component Id="GitCmdHereRegistryEntries" Guid="a2078f0a-b66f-47dc-8baf-c25a27490606">
+				<RegistryKey Root="HKCU" 
+							 Key="SOFTWARE\Classes\Directory\background\shell\git_cmd_here">
+					<RegistryValue Type="string" Value="Git C&amp;md Here" KeyPath="yes"/>
+					<RegistryValue Type="string" Name="Icon" Value="[APPLICATIONROOTDIRECTORY]\git-cmd.exe"/>
+				</RegistryKey>
+				<RegistryKey Root="HKCU" 
+							 Key="SOFTWARE\Classes\Directory\background\shell\git_cmd_here\command">
+					<RegistryValue Type="string" Value='"[APPLICATIONROOTDIRECTORY]\git-cmd.exe" "--cd=%v."'/>
+				</RegistryKey>
+			</Component>
+			<Component Id="GitGuiHereRegistryEntries" Guid="f3416549-5259-4f94-86af-96723536b8d5">
+				<RegistryKey Root="HKCU" 
+							 Key="SOFTWARE\Classes\Directory\background\shell\git_gui_here">
+					<RegistryValue Type="string" Value="Git &amp;GUI Here" KeyPath="yes"/>
+					<RegistryValue Type="string" Name="Icon" Value="[APPLICATIONROOTDIRECTORY]\cmd\git-gui.exe"/>
+				</RegistryKey>
+				<RegistryKey Root="HKCU" 
+							 Key="SOFTWARE\Classes\Directory\background\shell\git_gui_here\command">
+					<RegistryValue Type="string" Value='"[APPLICATIONROOTDIRECTORY]\cmd\git-gui.exe" "--working-dir" "%v."'/>
+				</RegistryKey>
+			</Component>
+		</DirectoryRef>
+
+		<!-- Define all installable features -->
+		<Feature Id="Programs" 
+				 Title="Git-for-Windows" 
+				 Level="1" 
+				 Absent="disallow" 
+				 Description="Git for Windows, pre-configured to use Windows Secure Channels instead of OpenSSL."
+				 AllowAdvertise="no" 
+				 ConfigurableDirectory="APPLICATIONROOTDIRECTORY">
+			<ComponentGroupRef Id="GIT_PORTABLE" />
+			<Feature Id="ExplorerIntegration"
+				 Title="Explorer Integration" 
+				 Level="1" 
+				 Absent="allow" 
+				 Description="Adds 'Git Bash Here', 'Git CMD here' and 'Git GUI Here' commands to the Explorer context menu."
+				 AllowAdvertise="no" >
+				<Feature Id="GitGuiHereFeature"
+						 Title="Git GUI Here" 
+						 Level="1" 
+						 Absent="allow" 
+						 Description="Adds 'Git GUI Here' command Explorer context menu."
+						 AllowAdvertise="no" >
+					<ComponentRef Id="GitGuiHereRegistryEntries" />
+				</Feature>
+				<Feature Id="GitBashHereFeature"
+						 Title="Git Bash Here" 
+						 Level="1" 
+						 Absent="allow" 
+						 Description="Adds 'Git Bash Here' command Explorer context menu."
+						 AllowAdvertise="no" >
+					<ComponentRef Id="GitBashHereRegistryEntries" />
+				</Feature>
+				<Feature Id="GitCmdHereFeature"
+						 Title="Git CMD Here" 
+						 Level="1" 
+						 Absent="allow" 
+						 Description="Adds 'Git CMD Here' command Explorer context menu."
+						 AllowAdvertise="no" >
+					<ComponentRef Id="GitCmdHereRegistryEntries" />
+				</Feature>
+			</Feature>
+			<Feature Id="DocumentationShortcuts" 
+				 Title="Add Documentation Start Menu Links" 
+				 Level="1" 
+				 Absent="allow" 
+				 Description="Add links to Git documentation to start menu group."
+				 AllowAdvertise="no" >
+				 
+				<ComponentRef Id="GitBookShortcut" />
+				<ComponentRef Id="GitReferenceShortcut" />
+				<ComponentRef Id="GitCommunityShortcut" />
+			</Feature>
+		</Feature>
+				
+		<!-- Define installer UI to be used -->
+		<UIRef Id="WixUI_FeatureTree" />
+		<Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONROOTDIRECTORY"></Property>
+		<UIRef Id="WixUI_ErrorProgressText"/>
+    </Product>
+</Wix>
