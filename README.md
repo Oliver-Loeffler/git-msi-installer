@@ -3,6 +3,10 @@
 * Requires: WiX Toolset 3.11 (for MSI packaging)
 * Requires: ImageMagick (for Icon conversions)
 
+## MSI Installer?
+
+Well, there is something in works by Git-for-Windows. Have a look at the projects [FAQ](https://github.com/git-for-windows/git/wiki/FAQ#is-there-an-msi-for-installation-via-group-policy).
+
 ## License and Attributions
 
 * [License](LICENSE) - Same license as Git, same license as Git Portable for Windows. https://git-scm.com/
